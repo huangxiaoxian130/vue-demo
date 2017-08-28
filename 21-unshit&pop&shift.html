@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <script src="node_modules/vue/dist/vue.js"></script>
+  <script src="node_modules/axios/dist/axios.js"></script>
+
+</head>
+<body>
+<div id="app">
+  <ul>
+    <li v-for="comment in comments">
+      {{comment.content}}
+    </li>
+  </ul>
+  <textarea v-model="current_content" cols="30" rows="10"></textarea>
+  <br>
+  <button v-on:click="push('end')">发表到后面</button>
+  <button v-on:click="push('pre')">发表到前面</button>
+  <button v-on:click="del('last')">删除最后一条评论</button>
+  <button v-on:click="del('first')">删除第一条评论</button>
+</div>
+<script>
+  var app = new Vue({
+    el: '#app',
+    data: {
+      current_content: '',   // 当前用户输入的内容
+      comments: [
+        {content: '111111111'},
+        {content: '222222222'},
+      ]
+    },
+    methods: {
+      push(type){
+        var content = {content: this.current_content}
+        switch (type) {
+          case 'end':
+            this.comments.push(content)
+            break
+          case 'pre':
+            this.comments.unshift(content)
+        }
+        this.current_content = ''
+      },
+      del(type){
+        switch (type){
+          case 'first':
+            this.comments.shift()
+            break
+          case 'last':
+            this.comments.pop()
+            break
+
+        }
+      }
+    }
+  })
+</script>
+
+
+</body>
+</html>

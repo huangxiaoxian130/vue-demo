@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <script src="node_modules/vue/dist/vue.js"></script>
+  <script src="node_modules/axios/dist/axios.js"></script>
+
+</head>
+<body>
+<div id="app">
+  <form action="" @submit="post($event)">//@submit.prevent="post()"
+    <h1>{{times}}</h1>
+  </form>
+
+</div>
+<script>
+  var app = new Vue({
+    el: '#app',
+    data: {
+      times:new Date()
+    },
+    methods:{
+      post(event){
+        event.preventDefault()
+        alert(this.times)
+      }
+    }
+  })
+</script>
+
+
+</body>
+</html>

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <script src="node_modules/vue/dist/vue.js"></script>
+  <script src="node_modules/axios/dist/axios.js"></script>
+
+</head>
+<body>
+<div id="app">
+
+  <hyx-news></hyx-news>
+
+  <hyx-news></hyx-news>
+  <hyx-news></hyx-news>
+
+</div>
+<!--子组件的template-->
+<script type="text/x-template" id="hyxNews">
+  <ul>
+    <li v-for=" v in news ">
+      {{v.title}}
+    </li>
+  </ul>
+
+</script>
+<script>
+
+
+  //  子组件的数据
+  var lists = {
+    news: [
+      {title: 'new1'},
+      {title: 'new2'}
+    ]
+  }
+
+  //  子组件
+  var hyxNews = {
+    template: '#hyxNews',
+    data(){
+      return lists
+    }
+  }
+
+  //根组件
+  var app = new Vue({
+    el: '#app',
+    components: {
+      hyxNews
+    }
+  })
+</script>
+
+
+</body>
+</html>

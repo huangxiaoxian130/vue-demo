@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <script src="node_modules/vue/dist/vue.js"></script>
+  <script src="node_modules/axios/dist/axios.js"></script>
+  <link href="https://cdn.bootcss.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" rel=stylesheet>
+  <!--<script src="https://cdn.bootcss.com/bootstrap/4.0.0-beta/js/bootstrap.min.js"></script>-->
+</head>
+<body>
+<div id="app">
+  <form action="" class="form-horizontal">
+    <div class="form-group">
+      <label class="col-sm-2 control-label">标题</label>
+      <div class="col-sm-10">
+        <input type="text" class="form-control" v-model.trim.lazy="field.title">
+      </div>
+      {{field.title}}
+    </div>
+    <div class="form-group">
+      <label class="col-sm-2 control-label">栏目</label>
+      <div class="col-sm-10">
+        <select v-model="field.cid" class="form-control" multiple>
+          <option value="">请选择</option>
+          <option v-for="v in category" :value="v.cid">{{v.title}}</option>
+
+        </select>
+        {{field.cid}}
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="col-sm-2 control-label">点击数</label>
+      <div class="col-sm-10">
+        <input type="text" class="form-control" v-model.number="field.click">
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="col-sm-2 control-label">链接</label>
+      <div class="col-sm-10">
+        <input type="text" class="form-control" v-model="field.url">
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="col-sm-2 control-label">类型</label>
+      <div class="col-sm-10">
+        <div class="checkbox-inline" v-for="v in flag">
+          <input type="checkbox" class="form-control"  v-model="field.vid" :value="v.name">{{v.title}}
+        </div>
+
+        {{field.flag}}
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="col-sm-2 control-label">类型</label>
+      <div class="col-sm-10">
+        <div class="radio-inline">
+          <input type="radio" class="form-control" v-model="field.type" value="draft">
+        </div>
+        <div class="radio-inline">
+          <input type="radio" class="form-control" v-model="field.type" value="send">
+        </div>
+        {{field.type}}
+      </div>
+    </div>
+  </form>
+</div>
+<script>
+  var app = new Vue({
+    el: '#app',
+    watch:{
+      'field.click':function (n, o) {
+        console.log(n)  //
+        console.log(typeof n)  //n为字符串类型,用v-model.number转成数字类型
+      }
+    },
+    data: {
+      flag:[
+        {name:'hot',title:'热门'},
+        {name:'recommend',title:'推荐'}
+      ],
+      category: [
+        {cid: 1, title: '新闻1'},
+        {cid: 2, title: '新闻2'},
+        {cid: 3, title: '新闻3'},
+        {cid: 4, title: '新闻4'},
+      ],
+      field: {
+        title: '标题',
+        click: 399,
+        url: 'baidu.com',
+        draft: false,
+        flag: ['hot', 'recommend'],
+        type: 'draft',
+        cid: ['','2']
+      }
+    },
+    methods: {}
+  })
+</script>
+
+
+</body>
+</html>

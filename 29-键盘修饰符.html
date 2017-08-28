@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <script src="node_modules/vue/dist/vue.js"></script>
+  <script src="node_modules/axios/dist/axios.js"></script>
+
+</head>
+<body>
+<div id="app">
+  <input type="text"  @keyup.ctrl.65="keyEvent"> // ctrl+a
+</div>
+<script>
+  var app = new Vue({
+    el: '#app',
+    data: {
+
+    },
+    methods:{
+      keyEvent(){
+        alert(111)
+      }
+    }
+  })
+</script>
+
+
+</body>
+</html>

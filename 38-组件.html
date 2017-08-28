@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <script src="node_modules/vue/dist/vue.js"></script>
+  <script src="node_modules/axios/dist/axios.js"></script>
+
+</head>
+<body>
+<div id="app">
+  <hyx-slide></hyx-slide>
+  <hyx-news></hyx-news>
+</div>
+<script>
+//  全局组件，要放在根组件之前
+  Vue.component('hyxSlide',{
+    template:'<h1>hyx</h1>'
+  })
+
+
+
+//根组件
+  var app = new Vue({
+    el: '#app',
+    components: {
+      hyxNews:{
+        template:'<h2>hyx2</h2>'
+      }
+    }
+  })
+</script>
+
+
+</body>
+</html>

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <script src="node_modules/vue/dist/vue.js"></script>
+  <script src="node_modules/axios/dist/axios.js"></script>
+
+</head>
+<body>
+<div id="app">
+  <ul>
+    <li v-for="user in status">
+      {{user.name}}-{{user.sex}}
+    </li>
+  </ul>
+  <input type="radio" v-model="type" value="girl">女孩
+  <input type="radio" v-model="type" value="boy">男孩
+</div>
+<script>
+  var app = new Vue({
+    el: '#app',
+    computed: {
+      status(){
+        if (this.type === 'all') {
+          return this.users;
+        } else {
+          return this.users.filter((user)=> {
+            return user.sex === this.type
+          })
+        }
+      }
+    },
+    data: {
+      type: 'all',   //默认显示所有
+      users: [
+        {name: '小明', sex: 'boy'},
+        {name: '小强', sex: 'boy'},
+        {name: '小莉', sex: 'girl'},
+        {name: '小红', sex: 'girl'},
+      ]
+    }
+  })
+</script>
+
+
+</body>
+</html>
