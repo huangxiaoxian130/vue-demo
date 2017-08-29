@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <script src="node_modules/vue/dist/vue.js"></script>
+  <script src="node_modules/axios/dist/axios.js"></script>
+
+</head>
+<body>
+<div id="app">
+
+  <hyx-news :lists.sync="goods"></hyx-news>
+  <div>总计{{totalPrice}}元</div>
+
+</div>
+<!--子组件的template-->
+<script type="text/x-template" id="hyxNews">
+  <table border="1" width="90%">
+    <tr>
+      <th>商品名称</th>
+      <th>商品数量</th>
+      <th>商品价格</th>
+    </tr>
+    <tr v-for="v in lists">
+      <td>{{v.title}}</td>
+      <td>{{v.price}}</td>
+      <td><input type="text" v-model="v.num"></td>
+    </tr>
+  </table>
+</script>
+<script>
+
+  //  子组件
+  var hyxNews = {
+    template: '#hyxNews',
+    data(){
+      return {}
+    },
+    props: ['lists'],
+    methods: {
+
+    }
+
+  }
+
+  //根组件
+  var app = new Vue({
+    el: '#app',
+    components: {
+      hyxNews
+    },
+    computed: {
+      totalPrice(){     //父组件数据发生变化时，计算属性也会变化
+        var sum = 0
+        this.goods.forEach((v)=> {
+          sum += v.price * v.num
+          return sum
+        })
+      }
+    },
+
+    data: {
+      totalPrice: 0,
+      goods: [
+        {title: 'iphone7Plus', price: 200, num: 1},
+        {title: 'iphone6Plus', price: 100, num: 1},
+
+      ]
+    },
+    methods: {}
+  })
+</script>
+
+
+</body>
+</html>

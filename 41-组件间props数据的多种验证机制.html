@@ -10,47 +10,41 @@
 <body>
 <div id="app">
 
-  <hyx-news></hyx-news>
-
-  <hyx-news></hyx-news>
-  <hyx-news></hyx-news>
+  <hyx-news :show-del-button="true"  :news="news"></hyx-news>
 
 </div>
 <!--子组件的template-->
 <script type="text/x-template" id="hyxNews">
   <ul>
+   {{showDelButton}}
     <li v-for=" (v,k) in news ">
       {{v.title}}
-      <button @click="del(k)">删除</button>
+      <button @click="del(k)" v-if="showDelButton">删除</button>
     </li>
   </ul>
 
 </script>
 <script>
 
-
-  //  子组件的数据,这样写，子组件的数据会被共享
-//  var lists = {
-//    news: [
-//      {title: 'new1'},
-//      {title: 'new2'}
-//    ]
-//  }
-
   //  子组件
   var hyxNews = {
     template: '#hyxNews',
-    data(){             //保证每个组件返回一个独立的数据，通过函数返回JSON
-      return {
-        news: [
-          {title: 'new1'},
-          {title: 'new2'}
-        ]
+    props: {
+  //      设置传递参数的类型
+      showDelButton:{
+        type:[Boolean,Number],
+//        default:false
+      },
+      news:{
+        type:Array
       }
     },
-    methods:{
+    data(){             // 保证每个组件返回一个独立的数据，通过函数返回JSON
+      return {}
+    },
+    methods: {
       del(k){
-        this.news.splice(k,1)
+        this.news.splice(k, 1)
       }
     }
   }
@@ -61,7 +55,13 @@
     components: {
       hyxNews
     },
-    data:{}     //根组件数据只有一个，可以不用函数返回
+    data: {
+      //父组件传递给子组件数据
+      news: [
+        {title: 'new1'},
+        {title: 'new2'}
+      ]
+    }
   })
 </script>
 

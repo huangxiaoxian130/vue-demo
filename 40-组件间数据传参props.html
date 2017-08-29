@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <script src="node_modules/vue/dist/vue.js"></script>
+  <script src="node_modules/axios/dist/axios.js"></script>
+
+</head>
+<body>
+<div id="app">
+
+  <!--父组件传递给子组件属性-->
+  <!--属性前面加：，传递的是变量；不加，传递的是字符串-->
+  <hyx-news hyx="hyxhyx" :show-del-button="true" :news="news"></hyx-news>
+
+</div>
+<!--子组件的template-->
+<script type="text/x-template" id="hyxNews">
+  <ul>
+    {{hyx}}-{{showDelButton}}
+    <li v-for=" (v,k) in news ">
+      {{v.title}}
+      <button @click="del(k)" v-if="showDelButton">删除</button>
+    </li>
+  </ul>
+
+</script>
+<script>
+
+  //  子组件
+  var hyxNews = {
+    template: '#hyxNews',
+    props: ['hyx', 'showDelButton', 'news'],  // 不管传递的那种数据，必须在props里面声明
+    data(){             // 保证每个组件返回一个独立的数据，通过函数返回JSON
+      return {}
+    },
+    methods: {
+      del(k){
+        this.news.splice(k, 1)
+      }
+    }
+  }
+
+  //根组件
+  var app = new Vue({
+    el: '#app',
+    components: {
+      hyxNews
+    },
+    data: {
+      //父组件传递给子组件数据
+      news: [
+        {title: 'new1'},
+        {title: 'new2'}
+      ]
+    }
+  })
+</script>
+
+
+</body>
+</html>

@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <script src="node_modules/vue/dist/vue.js"></script>
+  <script src="node_modules/axios/dist/axios.js"></script>
+  <!-- Latest compiled and minified CSS & JS -->
+  <link rel="stylesheet" media="screen" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+</head>
+<body>
+<div id="app">
+  <form action="" class="form-horizontal">
+    <bs-panel>
+      <h1 slot="title">美女</h1>
+      <bs-input title="姓名" value="黄颖霞" slot="body"></bs-input>
+    </bs-panel>
+  </form>
+</div>
+<!--子组件的template-->
+<script type="text/x-template" id="bsPanel">
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h3 class="panel-title">
+        <slot name="title"></slot>
+      </h3>
+    </div>
+    <div class="panel-body">
+      <slot name="body"></slot>
+    </div>
+  </div>
+</script>
+<!--子组件的template-->
+<script type="text/x-template" id="bsInput">
+  <div class="form-group">
+    <label class="col-sm-2 control-label">{{title}}</label>
+    <div class="col-sm-10">
+      <input type="text" class="form-control" :value="value">
+    </div>
+  </div>
+</script>
+
+<script>
+
+
+  //  子组件
+  var bsPanel = {
+    template: '#bsPanel'
+
+  }
+  //子组件
+  var bsInput = {
+    template: '#bsInput',
+    props: ['title', 'value'],
+    data(){
+      return {
+        hhhh: 'hhhh'
+      }
+    }
+  }
+
+  //根组件
+  var app = new Vue({
+    el: '#app',
+    components: {
+      bsPanel,
+      bsInput
+    }
+  })
+</script>
+
+
+</body>
+</html>
