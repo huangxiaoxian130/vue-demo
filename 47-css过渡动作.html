@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <script src="node_modules/vue/dist/vue.js"></script>
+  <script src="node_modules/axios/dist/axios.js"></script>
+  <!-- Latest compiled and minified CSS & JS -->
+  <link rel="stylesheet" media="screen" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+</head>
+<body>
+<div id="app">
+  <button @click="type=!type">切换</button>
+  <transition name="hxx">
+    <h1 v-if="type">黄小仙</h1>
+  </transition>
+</div>
+
+<!--v-enter:显示之前-->
+<!--v-enter-active:显示中-->
+<!--v-enter-to:显示完成-->
+<!--v-leave:隐藏之前-->
+<!--v-leave-active:隐藏中-->
+<!--v-leave-to:隐藏完成-->
+
+
+<script>
+
+
+  //根组件
+  var app = new Vue({
+    el: '#app',
+    data: {
+      type: true
+    }
+  })
+</script>
+<style>
+  .hxx-enter,.hxx-leave-to{
+    opacity:0;
+  }
+  .hxx-enter-active,.hxx-leave-active{
+    transition:all 2s;
+  }
+  .hxx-enter-to,.hxx-leave{
+
+  }
+</style>
+
+
+</body>
+</html>

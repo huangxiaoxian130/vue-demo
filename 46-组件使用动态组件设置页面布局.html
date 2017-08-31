@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <script src="node_modules/vue/dist/vue.js"></script>
+  <script src="node_modules/axios/dist/axios.js"></script>
+  <!-- Latest compiled and minified CSS & JS -->
+  <link rel="stylesheet" media="screen" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+</head>
+<body>
+<div id="app">
+  <!--动态显示不同的组件-->
+  <div :is="formType"></div>
+  <input type="radio" v-model="formType" value="hyxInput"> 文本框
+  <input type="radio" v-model="formType" value="hyxTextarea"> 文本域
+</div>
+
+<script>
+  //  子组件
+  var hyxInput = {
+    template: "<div><input></div>",
+  }
+  var hyxTextarea = {
+    template: "<div><textarea></textarea></div>"
+  }
+  //根组件
+  var app = new Vue({
+    el: '#app',
+    components: {hyxInput, hyxTextarea},
+    data: {
+      formType: 'hyxInput'
+    }
+  })
+</script>
+
+
+</body>
+</html>

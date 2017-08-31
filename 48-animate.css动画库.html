@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <script src="node_modules/vue/dist/vue.js"></script>
+  <script src="node_modules/axios/dist/axios.js"></script>
+  <!-- Latest compiled and minified CSS & JS -->
+  <link rel="stylesheet" media="screen" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <link rel="stylesheet" media="screen" href="https://cdn.bootcss.com/animate.css/3.5.2/animate.css">
+</head>
+<body>
+<div id="app">
+  <button @click="type=!type">切换</button>
+  <transition enter-active-class="animated slideInDown" leave-active-class="animated zoomOut">
+    <h1 v-if="type">黄小仙</h1>
+  </transition>
+</div>
+
+<!--v-enter:显示之前-->
+<!--v-enter-active:显示中-->
+<!--v-enter-to:显示完成-->
+<!--v-leave:隐藏之前-->
+<!--v-leave-active:隐藏中-->
+<!--v-leave-to:隐藏完成-->
+
+
+<script>
+
+
+  //根组件
+  var app = new Vue({
+    el: '#app',
+    data: {
+      type: true
+    }
+  })
+</script>
+<style>
+
+</style>
+
+
+</body>
+</html>

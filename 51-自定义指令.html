@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <script src="node_modules/vue/dist/vue.js"></script>
+  <script src="node_modules/axios/dist/axios.js"></script>
+  <!-- Latest compiled and minified CSS & JS -->
+  <link rel="stylesheet" media="screen" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+</head>
+<body>
+<div id="app">
+  <span v-star="color">黄小仙</span>
+  <input type="text" v-model="color" v-focus>
+  <input type="text" v-model="title" v-hyx.focus="'red'">
+</div>
+
+<script>
+  //定义指令
+  //  Vue.directive('star', {
+  //    bind(el, bind){
+  //      console.log(this.title)
+  //    }
+  //  })
+  //  Vue.directive('hyx', {
+  //    update(el, bind){
+  //      console.log(bind)
+  //    }
+  //  })
+  Vue.directive('hyx', function (el, bind) {
+//    console.log(el)
+//    console.log(this.title)
+  })
+
+  //根组件
+  var app = new Vue({
+    el: '#app',
+    data: {
+      title: 'baidu.com',
+      color: 'red'
+    },
+    directives: {
+//      bind update钩子
+      star(el, bind){
+        console.log(bind)
+        var color = bind.value ? bind.value : 'red'
+        el.style.cssText = "color:" + color
+      },
+//      focus(el,bind){
+//        el.focus()
+//      }
+//      表单加载的时候调用，focus函数
+//      绑定时还没有元素，换一个钩子
+      focus: {
+        inserted(el, bind){
+          console.log(el);
+          el.focus()
+        }
+      }
+    }
+  })
+</script>
+<style>
+
+</style>
+
+
+</body>
+</html>
