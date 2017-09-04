@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <script src="node_modules/vue/dist/vue.js"></script>
+  <script src="vue-router.js"></script>
+</head>
+<body>
+<div id="app">
+  <router-view class="menu" ></router-view>
+  <router-view class="news" name="news"></router-view>
+  <router-view class="slide" name="slide"></router-view>
+</div>
+
+
+<script type="text/x-template" id="menu">
+  <div>menu</div>
+</script>
+<script type="text/x-template" id="news">
+  <div>news</div>
+</script>
+<script type="text/x-template" id="slide">
+  <div>slide</div>
+</script>
+
+<script>
+  const menu = {
+    template: '#menu'
+  }
+  const news = {
+    template: '#news'
+  }
+  const slide = {
+    template: '#slide'
+  }
+
+  let routes = [
+    {
+      path: '/', components: {
+      news,
+      slide,
+      default:menu
+    }
+    },
+  ]
+  //要把组件交给路由器控制
+  let router = new VueRouter({routes})
+  new Vue({
+    el: '#app',
+    router
+  })
+</script>
+<style>
+  .menu {
+    border: 2px solid #999;
+    padding: 10px;
+  }
+
+  .news {
+    float: left;
+    border: 1px solid red;
+    width: 300px;
+  }
+
+  .slide {
+    float: left;
+    border: 1px solid red;
+    width: 300px;
+  }
+</style>
+
+
+</body>
+</html>

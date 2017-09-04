@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <script src="node_modules/vue/dist/vue.js"></script>
+  <script src="vue-router.js"></script>
+</head>
+<body>
+<div id="app">
+  <router-link to="content">内容</router-link>
+  <router-view></router-view>
+</div>
+<script type="text/x-template" id="content">
+  <div>
+    id:{{id}}
+    <button @click="show">检测数据</button>
+  </div>
+</script>
+
+<script>
+  const content = {
+    template: '#content',
+    data(){
+      return {
+        id: null
+      }
+    },
+//    组件生效之前
+    mounted(){
+      this.id = this.$route.params.id
+      if (!this.id) {
+        this.id = 1     //设置默认值id=1
+      }
+    },
+    methods: {
+      show(){
+        console.log(this.$route.params)
+      }
+    }
+  }
+  let routes = [
+    //      ？表示有参数也行，没有也行
+    {path: '/content/:id?', component: content}
+  ]
+
+  //要把组件交给路由器控制
+  let router = new VueRouter({routes})
+  new Vue({
+    el: '#app',
+    router
+  })
+</script>
+<style>
+
+</style>
+
+
+</body>
+</html>

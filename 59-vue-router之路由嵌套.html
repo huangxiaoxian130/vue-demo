@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <script src="node_modules/vue/dist/vue.js"></script>
+  <script src="vue-router.js"></script>
+</head>
+<body>
+<div id="app">
+  <router-view></router-view>
+</div>
+
+
+<script type="text/x-template" id="home">
+  <div>
+    <li v-for="v in news">
+      <router-link v-bind:to="{name:'content',params:{id:v.id}}">{{v.title}}</router-link>
+    </li>
+    <!--自路由组件显示区域-->
+    <router-view></router-view>
+
+  </div>
+</script>
+
+
+<script type="text/x-template" id="content">
+  <div>
+    <h1>{{field.title}}-{{field.id}}</h1>
+    <p>{{field.content}}</p>
+    <router-link to="/">返回首页</router-link>
+  </div>
+</script>
+
+
+<script>
+
+  var data = [
+    {id: 1, title: 'hyx1', content: '这是1内容。。。'},
+    {id: 2, title: 'hyx2', content: '这是2内容。。。'}
+  ]
+  //  主页路由
+  const home = {
+    template: '#home',
+    data(){
+      return {
+        news: data
+      }
+    }
+  }
+  const content = {
+    template: '#content',
+    data(){
+      return {
+        field: {}
+      }
+    },
+
+    mounted(){
+      var id = this.$route.params.id
+      for (let k = 0; k < data.length; k++) {
+        if (data[k].id == id) {
+          this.field = data[k]
+        }
+      }
+      console.log(this.field)
+    }
+
+  }
+
+  let routes = [
+
+    {path: '/', component: home,children:[
+      {path: '/content/:id?', component: content, name: 'content'}
+    ]},
+  ]
+
+  //要把组件交给路由器控制
+  let router = new VueRouter({routes})
+  new Vue({
+    el: '#app',
+    router
+  })
+</script>
+<style>
+
+</style>
+
+
+</body>
+</html>

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <script src="node_modules/vue/dist/vue.js"></script>
+  <script src="vue-router.js"></script>
+</head>
+<body>
+<div id="app">
+  <router-link to="/hyx1">HYX1</router-link>
+  <router-link to="/hyx2">HYX2</router-link>
+  <router-view></router-view>
+</div>
+
+
+<script>
+  //  组件1
+  const hyx1 = {
+    template: '<h1>hyx1</h1>'
+  }
+  const hyx2 = {
+    template: '<h1>hyx2</h1>'
+  }
+  let routes = [
+    {path: '/hyx1', component: hyx1},
+    {path: '/hyx2', component: hyx2}
+  ]
+
+  //要把组件交给路由器控制
+  let router = new VueRouter({routes})
+  new Vue({
+    el: '#app',
+    router
+  })
+</script>
+<style>
+
+</style>
+
+
+</body>
+</html>
